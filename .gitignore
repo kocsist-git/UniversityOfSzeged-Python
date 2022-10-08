@@ -1,3 +1,5 @@
 gyak01.py
 HelloWord.py
 input.py
+*.orig
+.DS_Store
