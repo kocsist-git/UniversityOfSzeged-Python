@@ -1,5 +1,4 @@
 halmaz = set()
-halmaz2 = {}
 halmaz3 = {1, 2, 3, 4}
 
 halmaz.add("citrom") # egy elem hozzáadása
