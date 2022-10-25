@@ -1,0 +1,14 @@
+{
+  "nev": "Python P\u00e9ter",
+  "emails": [
+    "hello@peti.hu",
+    "peter.python@munkahely.hu"
+  ],
+  "skillek": {
+    "MS Word": 10,
+    "MS Excel": 9,
+    "Python": 3,
+    "Java": 1,
+    "C++": null
+  }
+}
