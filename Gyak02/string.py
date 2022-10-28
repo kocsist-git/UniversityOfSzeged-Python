@@ -74,3 +74,7 @@ print("Hello, %s vagyok, %d éves." % (nev, eletkor))  # %-formatting
 
 elet_ertelme = 42
 print(f"Az élet értelme: {elet_ertelme}")             # f-string
+
+fileNev="biro.szte.feladatok.txt"
+print(fileNev.split(".")[-1])
+print(fileNev.split(".")[2])
