@@ -36,20 +36,20 @@
 
 import random
 
-elet = 20
-gondolt_szam = random.randint(1,1000)
-print(f"Gondoltam egy szamra 1 es 1000 kozott, talald ki, hogy melyikre! Eletek szama: {elet}")
+elet = 15
+gondolt_szam = random.randint(1,5000)
+print(f"Gondoltam egy számra 1 és 5000 között, találd ki, hogy melyikre! Életek száma: {elet}")
 while True:
     tipp = int(input("Tipp: "))
     if tipp != gondolt_szam:
         if elet > 1: 
             elet -= 1
-            print("Nagyobb" if gondolt_szam > tipp else "Kisebb")
+            print("Nagyobb ->" if gondolt_szam > tipp else " <- Kisebb")
         else:
             print("Sajnos nem nyertel!")
             break
     else:
-        print("Gratulalok, nyertel!")
+        print("<3 <3 <3 Gratulalok, nyertel! <3 <3 <3")
         print(f"A gondolt szam valoban {gondolt_szam} volt.")
         print(f"Megmaradt eletek: {elet}")
         break
