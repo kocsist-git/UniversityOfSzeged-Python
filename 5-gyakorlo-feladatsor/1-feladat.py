@@ -1,38 +1,5 @@
-# 1. Zenék adatainak beolvasása (6 pont)
-# Írj egy beolvas függvényt, amely nem vár paramétert! 
-# A függvény olvassa be a playlist.csv fájl tartalmát! 
-# A beolvasott sorok feldarabolása után minden zene adatait egy dictionary-ben tárold el! 
-# A dictionary-k az eloado, cim, mufaj és hossz kulcsokkal rendelkezzenek, 
-# amelyek közül a hossz kulcshoz tartozó érték egész szám, a többi kulcshoz tartozó érték string!
-# Az így kapott dictionary-ket helyezd egy listába, majd térj vissza a listával!
-# 
-# A fájlkezelés során ügyelj arra, hogy a megnyitott fájl minden esetben biztonságosan le legyen zárva!
-# Ehhez használd a gyakorlaton tanult, kontextus-kezelős megoldást!
-# 
-# A függvény elvárt visszatérési értéke:
-# 
-# [
-#     {'eloado': 'Rick Astley', 'cim': 'Never Gonna Give You Up', 'mufaj': 'pop', 'hossz': 213}, 
-#     {'eloado': 'Imagine Dragons', 'cim': 'Thunder', 'mufaj': 'pop', 'hossz': 204}, 
-#     {'eloado': 'Dragonforce', 'cim': 'Through the Fire and Flames', 'mufaj': 'metal', 'hossz': 445}, 
-#     {'eloado': 'Boney M.', 'cim': 'Rasputin', 'mufaj': 'pop', 'hossz': 284}, 
-#     {'eloado': 'Steppenwolf', 'cim': 'Born To Be Wild', 'mufaj': 'rock', 'hossz': 216}, 
-#     {'eloado': 'Powerwolf', 'cim': 'Incense and Iron', 'mufaj': 'metal', 'hossz': 240}, 
-#     {'eloado': 'Smash Mouth', 'cim': 'All Star', 'mufaj': 'rock', 'hossz': 237}, 
-#     {'eloado': 'Nirvana', 'cim': 'Smells Like Teen Spirit', 'mufaj': 'rock', 'hossz': 279}, 
-#     {'eloado': 'Gloryhammer', 'cim': 'The Unicorn Invasion of Dundee', 'mufaj': 'metal', 'hossz': 265}, 
-#     {'eloado': 'Powerwolf', 'cim': 'Venom of Venus', 'mufaj': 'metal', 'hossz': 208}, 
-#     {'eloado': 'Imagine Dragons', 'cim': 'Radioactive', 'mufaj': 'rock', 'hossz': 188}, 
-#     {'eloado': 'Dschinghis Khan', 'cim': 'Moskau', 'mufaj': 'pop', 'hossz': 275}, 
-#     {'eloado': 'Dschinghis Khan', 'cim': 'Dschinghis Khan', 'mufaj': 'pop', 'hossz': 185}, 
-#     {'eloado': 'Bonnie Tyler', 'cim': 'Total Eclipse of the Heart', 'mufaj': 'pop', 'hossz': 334}, 
-#     {'eloado': 'Gopnik McBlyat', 'cim': 'Snakes In Tracksuits', 'mufaj': 'hardbass', 'hossz': 261}, 
-#     {'eloado': 'Foster The People', 'cim': 'Pumped Up Kicks', 'mufaj': 'pop', 'hossz': 253}, 
-#     {'eloado': 'Linkin Park', 'cim': 'In The End', 'mufaj': 'rock', 'hossz': 219}, 
-#     {'eloado': 'Powerwolf', 'cim': 'Dancing With The Dead', 'mufaj': 'metal', 'hossz': 291}, 
-#     {'eloado': 'Green Day', 'cim': 'Boulevard of Broken Dreams', 'mufaj': 'rock', 'hossz': 288}, 
-#     {'eloado': 'Korpiklaani', 'cim': 'Ievan polkka', 'mufaj': 'metal', 'hossz': 194}
-# ]
+# https://cservz.github.io/teaching/szkriptnyelvek/feladatsorok/05/
+
 
 def beolvas():
     eredmeny = list()
@@ -94,8 +61,46 @@ def leggyakoribb_mufaj(lista):
 
     return gyoztes.upper()
 
+def zeneket_csoportosit(lista):
+    csoport = dict()
+    for eloadok in lista:
+        if eloadok["eloado"] in csoport:
+            csoport[eloadok["eloado"]] += eloadok["hossz"]
+        else:
+            csoport[eloadok["eloado"]] = eloadok["hossz"]
+    
+    with open("05_osszegzes.txt", "w") as f:
+        for kulcs, ertek in sorted(csoport.items()):
+            f.writelines(f"{kulcs} - osszesen {ertek} masodpercnyi zene\n")
+    return sorted(csoport.items())
+
+def zeneket_listaz(lista, eloado):
+    eloado2=eloado.replace(" ", "_").lower()
+    kiir=""
+    for szam in lista:
+        if szam["eloado"].lower() == eloado.lower():
+            kiir += szam["cim"] + ";" + szam["mufaj"] +";"+ str(szam["hossz"]) + "\n"
+    with open (f"06_{eloado2}_dalok.txt","w") as f:
+        if kiir == "": kiir="Nincs ilyen eloado a listaban!"
+        f.writelines(kiir)
+
+    return kiir
+
+def zeneket_torol(lista, eloadok):
+    kiir=""
+    for szam in lista:
+        if szam["eloado"] not in eloadok:
+            kiir += szam["eloado"] + ";" + szam["cim"] + ";" + szam["mufaj"] +";"+ str(szam["hossz"]) + "\n"
+    with open("07_torolt.txt","w") as f:
+        f.writelines(kiir)
+
 print(beolvas())
 print(teljes_hossz(beolvas()))
 print(leghosszabb_rockzene(beolvas()))
 print(leggyakoribb_mufaj(beolvas()))
+print(zeneket_csoportosit(beolvas()))
+print(zeneket_listaz(beolvas(), "Imagine Dragons"))
+print(zeneket_listaz(beolvas(), "POWERWOLF"))
+print(zeneket_listaz(beolvas(), "Taylor Swift"))
+zeneket_torol(beolvas(),['Imagine Dragons', 'Rick Astley', 'Powerwolf'])
 
