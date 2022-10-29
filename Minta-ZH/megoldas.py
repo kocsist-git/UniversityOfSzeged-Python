@@ -12,6 +12,7 @@ print(is_disarium(42))
 
 #2. Feladat
 def letter_combinations(szamok):
+
     szotar = {
         "2":"abc",
         "3":"def",
@@ -23,8 +24,13 @@ def letter_combinations(szamok):
         "9":"wxyz"
     }
     eredmeny = ""
-    for szam in szamok:
-            eredmeny += szotar[szam]
+    for i in range(szamok):
+        pass    
     return eredmeny
 
 print (letter_combinations("532"))
+
+class Savanyusag():
+    def __init__(self, minoseget_megorzi:tuple, nyitva:bool, elemek, _tipus):
+         self.minoseget_megorzi = minoseget_megorzi
+         self.nyitva = nyitva
