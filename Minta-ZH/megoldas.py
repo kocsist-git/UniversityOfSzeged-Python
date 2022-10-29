@@ -1,4 +1,7 @@
 # 1. Feladat
+from tkinter import E
+
+
 def is_disarium(szam):
     count = 1
     eredmeny = 0
@@ -11,8 +14,14 @@ print(is_disarium(175))
 print(is_disarium(42))
 
 #2. Feladat
-def letter_combinations(szamok):
+def descarte(a,b):
+    c = list()
+    for betuA in a:
+        for betuB in b:
+            c.append(betuA + betuB)
+    return c
 
+def letter_combinations(szamok):
     szotar = {
         "2":"abc",
         "3":"def",
@@ -23,12 +32,16 @@ def letter_combinations(szamok):
         "8":"tuv",
         "9":"wxyz"
     }
-    eredmeny = ""
-    for i in range(szamok):
-        pass    
+
+    eredmeny = szotar[szamok[0]]
+    for i in range(len(szamok)-1):
+        eredmeny = descarte(eredmeny, szotar[szamok[i+1]]) 
+    
     return eredmeny
 
-print (letter_combinations("532"))
+print(letter_combinations("532"))
+
+
 
 class Savanyusag():
     def __init__(self, minoseget_megorzi:tuple, nyitva:bool, elemek, _tipus):
