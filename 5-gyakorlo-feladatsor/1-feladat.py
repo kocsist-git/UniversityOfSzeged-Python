@@ -103,4 +103,3 @@ print(zeneket_listaz(beolvas(), "Imagine Dragons"))
 print(zeneket_listaz(beolvas(), "POWERWOLF"))
 print(zeneket_listaz(beolvas(), "Taylor Swift"))
 zeneket_torol(beolvas(),['Imagine Dragons', 'Rick Astley', 'Powerwolf'])
-
