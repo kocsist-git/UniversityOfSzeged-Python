@@ -39,7 +39,7 @@ def letter_combinations(szamok):
     
     return eredmeny
 
-print(letter_combinations("532"))
+print(letter_combinations("234"))
 
 
 
