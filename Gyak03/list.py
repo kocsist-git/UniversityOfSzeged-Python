@@ -114,3 +114,7 @@ print(" ".join(gyumolcsok))     # szöveggé egyesítés szóköz karakterek men
 print(";".join(gyumolcsok))     # szöveggé egyesítés pontosvesszők mentén
 print(" --- ".join(gyumolcsok)) # tetszőleges karaktersorozatot is megadhatunk
 
+bosszuallok1 = ["Thor", "Hulk", "Vízió"]
+bosszuallok2 = ["Thor", "Vízió", "Hulk"]
+
+print(sorted(bosszuallok1) == sorted(bosszuallok2))

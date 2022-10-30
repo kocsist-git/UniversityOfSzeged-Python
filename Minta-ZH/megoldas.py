@@ -42,7 +42,7 @@ print(letter_combinations("234"))
 
 
 class Savanyusag():
-    def __init__(self, minoseget_megorzi:tuple, nyitva:bool, *elemek, _tipus):
+    def __init__(self, minoseget_megorzi:tuple, nyitva:bool, _tipus, *elemek):
         self.minoseget_megorzi = minoseget_megorzi
         self.nyitva = nyitva
         self.elemek=elemek
@@ -60,7 +60,7 @@ class Savanyusag():
             self._tipus = ertek
     
     def szavatos(self, ev, honap, nap):
-        self.minoseget_megorzi >= (ev, honap, nap)
+        return True if self.minoseget_megorzi >= (ev, honap, nap) else False
 
     def fedel_csavar(self):
         if self.nyitva:
@@ -71,4 +71,41 @@ class Savanyusag():
     def __iadd__(self, savanyusag):
         if isinstance(savanyusag,Savanyusag):
             if savanyusag.nyitva and self.nyitva:
-                self.elemek + savanyusag.elemek
+                self.elemek=self.elemek + savanyusag.elemek
+                return self
+            elif not savanyusag.nyitva:
+                raise Exception("A masik savanyusag fedele zarva van!")
+            elif self.nyitva == False:
+                raise Exception("A savanyusag fedele zarva van!")
+
+    def __str__(self) -> str:
+        allapot = "nyitva" if self.nyitva else "zárva"
+        return f"Savanyitott {self.tipus}, aminek a fedele {allapot}." 
+    
+    def __imul__(self, haszor):
+        self.elemek = self.elemek * haszor
+        return self
+    
+    def __eq__(self, __o):
+        if sorted(self.elemek) != __o.elemek: return False
+        if sorted(self.minoseget_megorzi) != __o.minoseget_megorzi: return False
+        if sorted(self.nyitva) != __o.nyitva: return False
+        if sorted(self._tipus) != __o._tipus: return False
+
+savany1 = Savanyusag((1982,8,23),False,"Titkos", "Paprika" )
+savany2 = Savanyusag((1982,8,23),False,"Titkos", "Káposzta", "Bab" )
+print(savany1)
+print(savany2)
+print(savany2.tipus)
+savany2.tipus = "Bab"
+print(savany2.tipus)
+print(savany2.szavatos(2022,10,30))
+savany2.fedel_csavar()
+savany1.fedel_csavar()
+print(savany2)
+print(savany2.elemek)
+savany2 += savany1
+print(savany2.elemek) 
+savany2 *= 4
+print(savany2.elemek) 
+print(savany2 == savany1) 
