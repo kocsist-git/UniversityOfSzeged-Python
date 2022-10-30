@@ -1,6 +1,4 @@
 # 1. Feladat
-from tkinter import E
-
 
 def is_disarium(szam):
     count = 1
@@ -44,6 +42,33 @@ print(letter_combinations("234"))
 
 
 class Savanyusag():
-    def __init__(self, minoseget_megorzi:tuple, nyitva:bool, elemek, _tipus):
-         self.minoseget_megorzi = minoseget_megorzi
-         self.nyitva = nyitva
+    def __init__(self, minoseget_megorzi:tuple, nyitva:bool, *elemek, _tipus):
+        self.minoseget_megorzi = minoseget_megorzi
+        self.nyitva = nyitva
+        self.elemek=elemek
+        if len(elemek) == 1:
+            self._tipus = _tipus
+        else:
+            self._tipus="csalamade"
+
+    @property
+    def tipus(self): return self._tipus
+
+    @tipus.setter
+    def tipus(self, ertek):
+        if ertek in self.elemek:
+            self._tipus = ertek
+    
+    def szavatos(self, ev, honap, nap):
+        self.minoseget_megorzi >= (ev, honap, nap)
+
+    def fedel_csavar(self):
+        if self.nyitva:
+            self.nyitva = False
+        else:
+            self.nyitva = True
+    
+    def __iadd__(self, savanyusag):
+        if isinstance(savanyusag,Savanyusag):
+            if savanyusag.nyitva and self.nyitva:
+                self.elemek + savanyusag.elemek
